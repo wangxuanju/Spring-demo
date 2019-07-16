@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">      
+  
+    <bean id="header" class="com.netease.course.ScrewDriver">
+        <constructor-arg>
+            <ref bean="header"/>
+        </constructor-arg>
+    </bean>
+    
+    <bean id="header" class="com.netease.course.StraightHeader">
+    <!--第一种
+        <constructor-arg value="red"></constructor-arg>
+        <constructor-arg value="15"></constructor-arg>  -->
+    <!-- 第二种     
+        <constructor-arg index="1" value="red"></constructor-arg>
+        <constructor-arg index="0" value="15"></constructor-arg>--> 
+    <!-- 第三种
+        <constructor-arg type="java.lang.String" value="red"></constructor-arg>
+        <constructor-arg type="int" value="15"></constructor-arg> -->
+     <!-- 第四种  
+        <constructor-arg name="color" value="red"></constructor-arg>
+        <constructor-arg name="size" value="15"></constructor-arg>  --> 
+        
+        
+        <constructor-arg name="color" value="${color}"></constructor-arg>
+        <constructor-arg name="size" value="${size}"></constructor-arg>
+        
+        
+        <!--  
+        <constructor-arg>
+            <map> 一
+                <entry key="color" value="red"></entry>
+                <entry key="size" value="14"></entry>
+            </map> -->
+        <!-- 二
+            <list>
+                <value>red</value>
+                <value>14</value>
+            </list> -->
+        <!--三   
+            <set>
+                <value>red</value>
+                <value>14</value>
+            </set> -->
+        <!-- 
+            <props>
+                <prop key="color">red</prop>
+                <prop key="size">14</prop>
+            </props> 
+            </constructor-arg>
+            -->
+             
+    </bean>  
+    
+    <bean id="headerProperties"
+        class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location" value="classpath:header.properties"></property>
+    </bean> 
+    
+
+</beans>
