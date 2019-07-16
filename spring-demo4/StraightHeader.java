@@ -11,12 +11,12 @@ public class StraightHeader implements Header {
 	private String color;
 	@Value("${size}")
 	private int size;
-	
+        //老是报错
 	@PostConstruct
 	public void init() {
 		System.out.println("init the header");
 	}
-	
+        //老是报错
 	@PreDestroy
 	public void destroy() {
 		System.out.println("destroy the header");
