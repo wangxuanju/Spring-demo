@@ -35,6 +35,113 @@ XML schema-based AOP
 @AspectJ：配置分散，兼容AspectJ（推荐）
 
 Schema:配置集中
+## @AspectJ AOP
+aspectJweaver.jar
+
+配置文件中：<aop:aspectJ-autoproxy/>
+
+### 定义Aspect
+<bean id=”loggingAsepct” class=”com.netease.course.LoggingAspect”></bean>
+
+Import org.aspectj.lang.annotation.Aspect;
+@Aspect
+Public class LoggingAspect{
+
+}
+
+### 定义Pointcut
+@Pointcut(“execution(* com.netease.course.Caculator.*(..))”)
+Private void arithmetic(){}
+
+### Pointcut表达式
+designator (modifiers? return-type declaring-type? name (param) throws?)
+(execution,within)(public,private)(返回类型，*)(包名，类名)（函数名，*）（参数列表：（）无惨，（）任意参数）（异常类型）
+
+
+### Pointcut示例
+所有的public函数 
+```java
+execution(public **(..)) 
+private void publicMethod()
+```
+所有DAO模块中的public函数  
+```java
+execution(public * com.netease.dao *.*(..))
+private void publicDaoMethod()
+```
+所有以save开头的函数 
+```java
+execution(* save*(..))
+private void saveMethod()
+```
+所有以save开头的Public函数 
+```java
+exectution(publciMehod()&&saveMehod())
+private void publicSaveMethod()
+```
+### 定义Advice
+```java
+@Before(“com.netease.course.LoggingAspect.arithmetic()”)
+Public void doLog(){
+
+}
+@Before(“execution(* com.netease.course.Caculator.*(..))”)
+Public void doLog(){
+
+}
+//函数返回之后
+@AfterReturning(“com.netease.course.LoggingAspect.arithmetic()”)
+Public void doLog(){
+}
+@AfterThrowing(“com.netease.course.LoggingAspect.arithmetic()”)
+Public void doLog(){
+
+}
+@After(“com.netease.course.LoggingAspect.arithmetic()”)
+Public void doLog(){
+}
+```
+### Advice参数
+```java
+//函数上下文信息
+@Before(“com.netease.course.LoggingAspect.arithmetic()”)
+Public void doLog(JoinPoint jp){
+    System.out.println(jp.getSignature()+”,”+jp.getArgs());
+}
+
+@Around(“com.netease.course.LoggingAspect.arithmetic()”)
+Public void doLog(ProceedingJoinPoint pjp){
+System.out.println(“start method:”+pjp.toStirng())
+
+Object retVal = pjp.proceed();
+System.out.println(“stop method:”+pjp.toStirng())
+Return retVal;
+
+}
+
+//返回值
+@AfterRturning(
+pointcut=”com.netease.course.LoggingAspect.arithmetic()”,
+returning=”retVal”)
+public void doLog(Object retVal){
+
+}
+
+//异常
+@AfterThrowing(
+Pointcut=”com.netease.course.LoggingAspect.arithmetic()”,
+Throwing=”ex”)
+Public void doLog(IllegalArgumentException ex){
+
+}
+
+
+//目标函数参数
+@Before(“com.netease.course.LoggingAspect.arithmetic()&&args(a,..)”)
+Public void doLog(JoinPoint jp,int a){
+
+}
+```
 ## Schema-based AOP
 ### 定义Aspect
 ```java
