@@ -41,6 +41,7 @@ aspectJweaver.jar
 配置文件中：<aop:aspectJ-autoproxy/>
 
 ### 定义Aspect
+```java
 <bean id=”loggingAsepct” class=”com.netease.course.LoggingAspect”></bean>
 
 Import org.aspectj.lang.annotation.Aspect;
@@ -48,15 +49,17 @@ Import org.aspectj.lang.annotation.Aspect;
 Public class LoggingAspect{
 
 }
-
+```
 ### 定义Pointcut
+```java
 @Pointcut(“execution(* com.netease.course.Caculator.*(..))”)
 Private void arithmetic(){}
-
+```
 ### Pointcut表达式
+```java
 designator (modifiers? return-type declaring-type? name (param) throws?)
 (execution,within)(public,private)(返回类型，*)(包名，类名)（函数名，*）（参数列表：（）无惨，（）任意参数）（异常类型）
-
+```
 
 ### Pointcut示例
 所有的public函数 
