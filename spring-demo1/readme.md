@@ -74,7 +74,7 @@ Public void cleanup(){
 定义接口
 实现接口
 以接口为基础注入
-
+```java
 依赖注入方式：基于构造函数(强依赖)、基于setter方法（可选依赖）
 Public class ScrewDriver{
 Private Header header;
@@ -89,17 +89,23 @@ Public setHeader(Header header){
     This.header = header;
 }
 }
-
+```
 ## 依赖注入
 基本类型（int,Sting）
+
 集合
+
 Bean
+
 配置文件
+
 当依赖很多的情况下注入,所以提供了自动装配的机制（Autowiring）
 
 ### 自动装配
 byname:根据Bean名称
+
 byType:根据Bean类型
+
 constructor：构造函数，根据类型
 
 
@@ -119,6 +125,9 @@ response.getWriter().write(“Hello, Spring Web”);
 
 ### Annotation
 @Component:定义Bean
+
 @Value:properties注入
+
 @Autowired&@Resource:自动装配依赖
+
 @PostConstruct&@PreDestroy：生命周期回调
