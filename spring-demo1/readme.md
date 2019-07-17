@@ -36,9 +36,11 @@ ScrewDriver screwDriver = context.getBean("screwDriver",ScrewDriver.class);
 screwDriver.use();
 ```
 ### 什么是Bean的作用域？有效范围
-singleton(默认作用域)                                        request session
-Prototype（每次引用都创建一个新的实例）               global  session application
-（剩下四种是应用于web场景）
+singleton(默认作用域)  
+
+Prototype（每次引用都创建一个新的实例） 
+
+request    session    global session    application（剩下四种是应用于web场景）
 
 ### Bean生命周期回调
 ```java
@@ -73,9 +75,6 @@ public class ScrewDriver{
 ```
 
 ### IOC
-定义接口
-实现接口
-以接口为基础注入
 ```java
 依赖注入方式：基于构造函数(强依赖)、基于setter方法（可选依赖）
 Public class ScrewDriver{
