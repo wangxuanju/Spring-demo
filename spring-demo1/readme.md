@@ -6,14 +6,16 @@ IOC容器= ApplicationContext(代码中表达）
 Web.xml中
 ```java
 <context-param>
-<param-name>contextConfigLocation</parm-name>
-<param-value>
-    classpath:application-context.xml</param-value>
+    <param-name>contextConfigLocation</parm-name>
+    <param-value>
+        classpath:application-context.xml
+    </param-value>
 </context-param>
 
 <listener>
-<listener-class>org.springframework.web.context.ContextLoaderListener
-</listener-class>
+    <listener-class>
+        org.springframework.web.context.ContextLoaderListener
+    </listener-class>
 </listener>
 
 ApplicationContext context = new ClassPathXmlApplicationContext(“application-context.xml”);
@@ -50,9 +52,9 @@ Public interface InitializingBean{
 <bean id=“screwDriver” class=”com.netease.course.ScrewDriver” init-method=”init”></bean>
 
 public class ScrewDriver{
-Public void init(){
+    Public void init(){
         System.out.prinln(“Init screwDriver”);
-}
+    }
 }
 销毁-释放资源
 
@@ -64,9 +66,9 @@ Public interface DisposableBean{
 <bean id=“screwDriver” class=”com.netease.course.ScrewDriver” init-method=”init” destroy-method=”cleanup”></bean>
 
 public class ScrewDriver{
-Public void cleanup(){
+    Public void cleanup(){
         System.out.prinln(“cleanup screwDriver”);
-}
+    }
 }
 ```
 
@@ -77,16 +79,16 @@ Public void cleanup(){
 ```java
 依赖注入方式：基于构造函数(强依赖)、基于setter方法（可选依赖）
 Public class ScrewDriver{
-Private Header header;
-Public ScrewDriver(Header header){
-    This.header = header;
+    Private Header header;
+    Public ScrewDriver(Header header){
+        this.header = header;
 }
 }
 
 Public class ScrewDriver{
-Private Header header;
-Public setHeader(Header header){
-    This.header = header;
+    Private Header header;
+    Public setHeader(Header header){
+        this.header = header;
 }
 }
 ```
@@ -116,7 +118,7 @@ constructor：构造函数，根据类型
 Public class HelloController{
 @RequestMapping(value=”/spring”)
 Public void spring(HttpServletResponse response)throws IOException{
-response.getWriter().write(“Hello, Spring Web”);
+    response.getWriter().write(“Hello, Spring Web”);
 }
 ```
 
