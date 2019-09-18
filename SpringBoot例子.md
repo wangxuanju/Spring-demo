@@ -1,5 +1,5 @@
 # 快速构建SpringBoot的方式
-## domain：实体类
+## domain：实体类(常常与数据库表对应）
 ```java
 public class User {
 	String id;
@@ -32,7 +32,7 @@ public class User {
 	}
 }
 ```
-## dao层
+## dao层：一般dao接口与映射文件一一对应
 ```java
 import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
