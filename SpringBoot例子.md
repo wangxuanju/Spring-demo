@@ -32,7 +32,7 @@ public class User {
 	}
 }
 ```
-## dao层：一般dao接口与映射文件一一对应
+## dao层：一般dao接口与SQL映射文件一一对应
 ```java
 import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
