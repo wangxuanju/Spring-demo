@@ -73,7 +73,7 @@ new Module---Maven---GroupId/ArtifactId--完成(此过程为在父Module下建�
  //<scope>test</scope> //test范围依赖 在一般的编译和运行时都不需要，它们只有在测试编译和测试运行阶段可用。
 ```
 ## 导入常用的依赖jar包
-
+以后添加
 
 # 数据库如何连接
 ```java
@@ -86,7 +86,8 @@ use wenda；使用wenda数据库
 show wenda;显示wenda数据库中有哪些表
 show columns from user;显示user表的内容
 ```
-```java application.properties
+application.properties文件
+```java 
 spring.mvc.view.suffix=.jsp
 spring.mvc.view.prefix=/WEB-INF/jsp/
 
