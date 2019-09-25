@@ -56,6 +56,34 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	
+	<update id="updatePassword" parameterType="hashMap">
+		update admininfo set password=#{password}
+		where 
+		adminId in 
+		<foreach collection="ids" open="(" close=")" separator="," item="id">
+			#{id}
+		</foreach>
+	</update>
+	
+	
+	<update id="updateByPassword" parameterType="com.cscbms.entity.Admin">
+		update admininfo set 
+			password=#{password,jdbcType=VARCHAR}
+		where adminId=#{adminId}
+	</update>
+	
+	<delete id="deleteAdminRoles" parameterType="int">
+		delete from adminrole where adminId=#{adminId}
+	</delete>
+	
+	<insert id="saveAdminRoles" parameterType="hashMap">
+		insert into adminrole(adminId,roleId) values(
+			#{adminId,jdbcType=NUMERIC},
+			#{roleId,jdbcType=NUMERIC}
+		)
+	</insert>
+	
+	
 	<select id="findByPage" 
 		parameterType="com.cscbms.entity.page.Page" 
 		resultMap="adminMap">
@@ -78,6 +106,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		) order by adminId limit #{begin},#{end}
 	
 	</select>
+	
 	<select id="selectRoles" 
 		parameterType="int" 
 		resultType="com.cscbms.entity.Role">
@@ -86,6 +115,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			where adminId=#{id}
 		)
 	</select>
+	
 	<resultMap id="adminMap" type="com.cscbms.entity.Admin">
 		<id column="adminId" property="adminId" />
 		<collection ofType="com.cscbms.entity.Role"
@@ -114,43 +144,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</where>
 		)
 	</select>	
-	
-	<update id="updatePassword" parameterType="hashMap">
-		update admininfo set password=#{password}
-		where 
-		adminId in 
-		<foreach collection="ids" open="(" close=")" separator="," item="id">
-			#{id}
-		</foreach>
-	</update>
-	
 
-	
-
-	
-	<insert id="saveAdminRoles" parameterType="hashMap">
-		insert into adminrole(adminId,roleId) values(
-			#{adminId,jdbcType=NUMERIC},
-			#{roleId,jdbcType=NUMERIC}
-		)
-	</insert>
-	
-	
-	
-	<delete id="deleteAdminRoles" parameterType="int">
-		delete from adminrole where adminId=#{adminId}
-	</delete>
-	
-	
-	
-
-	
-	<update id="updateByPassword" parameterType="com.cscbms.entity.Admin">
-		update admininfo set 
-			password=#{password,jdbcType=VARCHAR}
-		where adminId=#{adminId}
-	</update>
-	
 	<select id="findModulesByAdmin" 
 		parameterType="int"
 		resultType="com.cscbms.entity.Module">
