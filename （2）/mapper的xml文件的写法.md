@@ -17,6 +17,45 @@ mapper标签
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cscbms.dao.AdminDao">
+	<insert id="saveAdmin" useGeneratedKeys="true" keyProperty="adminId" parameterType="com.cscbms.entity.Admin">
+		insert into admininfo(adminCode,password,name,telephone,email,enrollDate) values(
+			#{adminCode,jdbcType=VARCHAR},
+			#{password,jdbcType=VARCHAR},
+			#{name,jdbcType=VARCHAR},
+			#{telephone,jdbcType=VARCHAR},
+			#{email,jdbcType=VARCHAR},
+			#{enrollDate,jdbcType=TIMESTAMP}
+		)
+	</insert>
+	
+	
+	<update id="updateAdmin" parameterType="com.cscbms.entity.Admin">
+		update admininfo set 
+			name=#{name,jdbcType=VARCHAR},
+			telephone=#{telephone,jdbcType=VARCHAR},
+			adminCode=#{adminCode,jdbcType=VARCHAR},
+			email=#{email,jdbcType=VARCHAR}
+		where adminId=#{adminId}
+	</update>
+	
+	
+	<delete id="deleteAdmin" parameterType="int">
+		delete from admininfo where adminId=#{id}
+	</delete>
+	
+	
+	<select id="findById" parameterType="int" resultMap="adminMap">
+		select * from admininfo where adminId=#{id}
+	</select>
+	
+	
+	<select id="findByCode" 
+		parameterType="string"
+		resultType="com.cscbms.entity.Admin">
+		select * from admininfo where adminCode=#{adminCode}
+	</select>
+	
+	
 	<select id="findByPage" 
 		parameterType="com.cscbms.entity.page.Page" 
 		resultMap="adminMap">
@@ -85,20 +124,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</foreach>
 	</update>
 	
-	<select id="findById" parameterType="int" resultMap="adminMap">
-		select * from admininfo where adminId=#{id}
-	</select>
+
 	
-	<insert id="saveAdmin" useGeneratedKeys="true" keyProperty="adminId" parameterType="com.cscbms.entity.Admin">
-		insert into admininfo(adminCode,password,name,telephone,email,enrollDate) values(
-			#{adminCode,jdbcType=VARCHAR},
-			#{password,jdbcType=VARCHAR},
-			#{name,jdbcType=VARCHAR},
-			#{telephone,jdbcType=VARCHAR},
-			#{email,jdbcType=VARCHAR},
-			#{enrollDate,jdbcType=TIMESTAMP}
-		)
-	</insert>
+
 	
 	<insert id="saveAdminRoles" parameterType="hashMap">
 		insert into adminrole(adminId,roleId) values(
@@ -107,28 +135,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		)
 	</insert>
 	
-	<update id="updateAdmin" parameterType="com.cscbms.entity.Admin">
-		update admininfo set 
-			name=#{name,jdbcType=VARCHAR},
-			telephone=#{telephone,jdbcType=VARCHAR},
-			adminCode=#{adminCode,jdbcType=VARCHAR},
-			email=#{email,jdbcType=VARCHAR}
-		where adminId=#{adminId}
-	</update>
+	
 	
 	<delete id="deleteAdminRoles" parameterType="int">
 		delete from adminrole where adminId=#{adminId}
 	</delete>
 	
-	<delete id="deleteAdmin" parameterType="int">
-		delete from admininfo where adminId=#{id}
-	</delete>	
 	
-	<select id="findByCode" 
-		parameterType="string"
-		resultType="com.cscbms.entity.Admin">
-		select * from admininfo where adminCode=#{adminCode}
-	</select>
+	
+
 	
 	<update id="updateByPassword" parameterType="com.cscbms.entity.Admin">
 		update admininfo set 
