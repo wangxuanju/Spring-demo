@@ -23,7 +23,7 @@ http://maven.apache.org/xsd/maven-4.0.0.xsd">
        <dependency>
          <groupId>org.springframework</groupId>
          <artifactId>spring-context</artifactId>
-         <version>4.2.1.RELEASE</version>
+         <version>5.2.22.RELEASE</version>
      </dependency>
  </dependencies> 
   
